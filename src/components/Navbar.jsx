@@ -14,10 +14,7 @@ const Navbar = () => {
             link: "/media",
             name: "Media",
         },
-        {
-            link: "/messages",
-            name: "Messages",
-        },
+        
         {
             link: "/about",
             name: "About",
@@ -26,7 +23,7 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="navbar bg-primary md:px-32 py-6 items-start">
+            <div className="navbar justify-between bg-primary md:px-32 py-6 items-start">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-primary lg:hidden">
@@ -111,7 +108,7 @@ const Navbar = () => {
                         <span className="text-5xl font-bold text-secondary">Book</span>
                     </Link>
                 </div>
-                <div className="navbar-center hidden lg:flex items-center justify-center">
+                <div className="navbar-end hidden lg:flex items-center justify-center">
                     <ul className="menu menu-horizontal px-1 items-center">
                         {navItems.map((navItem) => {
                             const { link, name } = navItem;
@@ -129,10 +126,10 @@ const Navbar = () => {
                             );
                         })}
 
-                        <span className="mx-5 text-secondary">||</span>
+                        
                     </ul>
                 </div>
-                <div className="navbar-end flex-none gap-2">
+                <div className=" flex-none">
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
@@ -143,9 +140,7 @@ const Navbar = () => {
                             tabIndex={0}
                             className="mt-8 p-2 shadow menu menu-compact dropdown-content border border-primary text-primary rounded-box w-52"
                         >
-                            <li>
-                                <a className="text-2xl">Profile</a>
-                            </li>
+                            
 
                             <li>
                                 <a className="text-2xl">Logout</a>
