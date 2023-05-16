@@ -15,7 +15,7 @@ const Footer = () => {
                                     P
                                 </span>
                                 <span className="text-5xl font-bold text-primary bg-secondary">
-                                    ort
+                                    ost
                                 </span>
                                 <span className="text-5xl font-bold text-secondary bg-primary">
                                     Book
@@ -90,7 +90,7 @@ const Footer = () => {
                                         href="javascript:void(0)"
                                         className="text-body-color hover:text-primary mb-2 inline-block text-base leading-loose"
                                     >
-                                        About PortBook
+                                        About PostBook
                                     </a>
                                 </li>
                                 <li>
@@ -216,7 +216,7 @@ const Footer = () => {
                                     </svg>
                                 </a>
                             </div>
-                            <p className="text-body-color text-base">&copy; 2025 PortBook</p>
+                            <p className="text-body-color text-base">&copy; 2025 PostBook</p>
                         </div>
                     </div>
                 </div>

@@ -104,7 +104,7 @@ const Navbar = () => {
                     </div>
                     <Link to="/" className="cursor-pointer text-xl flex items-end">
                         <span className="text-5xl font-bold text-primary bg-secondary">P</span>
-                        <span className="text-5xl font-bold text-primary bg-secondary">ort</span>
+                        <span className="text-5xl font-bold text-primary bg-secondary">ost</span>
                         <span className="text-5xl font-bold text-secondary">Book</span>
                     </Link>
                 </div>
