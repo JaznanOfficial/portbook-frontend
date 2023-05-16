@@ -22,7 +22,7 @@ const SinglePost = () => {
                     </p>
                     <a
                         href="javascript:void(0)"
-                        className="text-body-color hover:border-primary hover:bg-primary inline-block rounded-full border border-[#E5E7EB] py-2 px-7 text-base font-medium transition hover:text-white"
+                        className="text-body-color hover:border-primary hover:bg-primary inline-block rounded-full border border-primary  py-2 px-7 text-primary font-medium transition hover:text-white"
                     >
                         View Details
                     </a>

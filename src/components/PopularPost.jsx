@@ -20,7 +20,7 @@ const PopularPost = () => {
                         </div>
                     </div>
                 </div>
-                <div className=" grid grid-cols-1 md:grid-cols-3 gap-5 justify-center items-center  ">
+                <div className=" grid grid-cols-1 md:grid-cols-3 gap-5 justify-center items-center px-5 ">
                     {Array.from({ length: 3 }).map((item, id) => (
                         <SinglePost key={id} />
                     ))}

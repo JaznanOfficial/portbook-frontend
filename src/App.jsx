@@ -8,6 +8,7 @@ import AllPosts from "./components/AllPosts";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/media/:id" element={<AllPosts />}></Route>
                 <Route path="/about" element={<About />}></Route>
                 <Route path="/sign-up" element={<SignUp />}></Route>
+                <Route path="/sign-in" element={<SignIn />}></Route>
                 <Route path="/*" element={<NotFound />}></Route>
             </Routes>
             <Footer />
