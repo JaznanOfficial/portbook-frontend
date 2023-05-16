@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const SinglePost = () => {
     return (
         
@@ -20,12 +22,12 @@ const SinglePost = () => {
                         Lorem ipsum dolor sit amet pretium consectetur adipiscing elit. Lorem
                         consectetur adipiscing elit.
                     </p>
-                    <a
-                        href="javascript:void(0)"
+                    <Link
+                        to='/media/1'
                         className="text-body-color hover:border-primary hover:bg-primary inline-block rounded-full border border-primary  py-2 px-7 text-primary font-medium transition hover:text-white"
                     >
                         View Details
-                    </a>
+                    </Link>
                 </div>
             </div>
         

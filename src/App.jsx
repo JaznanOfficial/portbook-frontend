@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import About from "./pages/About";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import DetailsPost from "./pages/DetailsPost";
 
 function App() {
     return (
@@ -16,8 +17,9 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<HomePage />}></Route>
-                <Route path="/media" element={<AllPosts />}></Route>
-                <Route path="/media/:id" element={<AllPosts />}></Route>
+                <Route path="/media" element={<AllPosts />}>
+                </Route>
+                <Route path="/media/:id" element={<DetailsPost />}></Route>
                 <Route path="/about" element={<About />}></Route>
                 <Route path="/sign-up" element={<SignUp />}></Route>
                 <Route path="/sign-in" element={<SignIn />}></Route>
