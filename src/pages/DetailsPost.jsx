@@ -1,5 +1,4 @@
-import { BsHeartFill } from "react-icons/bs";
-import { BsHeart } from "react-icons/bs";
+
 
 const DetailsPost = () => {
     return (
