@@ -17,8 +17,9 @@ const postsApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body:data
             })
-        })
+        }),
+       
     })
 })
 
-export const { useGetPostsQuery,usePostPostsMutation, useGetPostQuery } = postsApi;
+export const { useGetPostsQuery,usePostPostsMutation, useGetPostQuery, useLikeUpdateQuery } = postsApi;

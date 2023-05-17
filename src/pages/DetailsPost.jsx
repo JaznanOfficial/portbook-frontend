@@ -1,14 +1,36 @@
 import { useGetPostQuery } from "../features/posts/postsApi";
 import { useParams } from "react-router-dom";
+import useFirebase from "../hooks/useFirebase";
+import Loader from "../components/Loader";
+import axios from "axios";
 
 const DetailsPost = () => {
+    // const [isLiked, setIsLiked] = useState()
+    const { user } = useFirebase();
     const { id } = useParams();
-    console.log(id);
+    // console.log(id);
 
-    const { data, isLoading, isError, error } = useGetPostQuery(id);
-    console.log(data);
+    const { data, isLoading } = useGetPostQuery(id);
+    // console.log(data);
 
-    const { name, img, post } = data[0] || {};
+    // const dispatch = useDispatch()
+
+    const { name, img, post, _id, like_count } = data?.[0] || {};
+
+    const liked = like_count?.includes(user?.email);
+    console.log(liked);
+
+    const likeHandler = async (id, email) => {
+        console.log(id, email);
+        await axios
+            .patch(`http://localhost:5000/api/v1/blogs/${id}`, { email })
+            .then((res) => console.log(res));
+    };
+
+    if (isLoading) {
+        return <Loader />;
+    }
+
     return (
         <div>
             <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900">
@@ -45,20 +67,21 @@ const DetailsPost = () => {
                         </header>
 
                         <figure>
-                            <img
-                                src={img}
-                                alt=""
-                            />
+                            <img src={img} alt="" />
                         </figure>
 
-                        <p className="my-10">
-                            {post}
-                        </p>
+                        <p className="my-10">{post}</p>
 
                         <div className="h-36 border-t border-b border-primary py-5 w-full flex justify-center items-center">
-                            <i className="fa-solid fa-heart text-[5rem] text-red-600"></i>
-                            <i className="fa-regular fa-heart text-[5rem] text-black"></i>
-                            <p className="text-5xl ml-3">0</p>
+                            {liked ? (
+                                <i
+                                    className="fa-solid fa-heart text-[5rem] text-red-600"
+                                    onClick={() => likeHandler(_id, user?.email)}
+                                ></i>
+                            ) : (
+                                <i className="fa-regular fa-heart text-[5rem] text-black"></i>
+                            )}
+                            <p className="text-5xl ml-3">{like_count?.length}</p>
                         </div>
 
                         <section className="not-format mt-5">

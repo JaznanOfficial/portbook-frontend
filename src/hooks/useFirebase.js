@@ -187,7 +187,7 @@ const useFirebase = () => {
         return () => unsubscribe;
     }, [auth]);
 
-    console.log(userDetail);
+    // console.log(userDetail);
 
     return {
         signUpWithEmailAndPassword,
