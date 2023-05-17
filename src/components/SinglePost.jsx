@@ -12,7 +12,7 @@ const SinglePost = ({ post }) => {
                     </p>
                 </h3>
                 <p className="text-body-color mb-7 text-base leading-relaxed">
-                    {blog.slice(0, 100)}
+                    {blog?.slice(0, 100)}
                 </p>
                 <Link
                     to={`/media/${_id}`}

@@ -19,15 +19,15 @@ const DetailsPost = () => {
     const { name, img, post, _id, like_count } = data?.[0] || {};
 
     const liked = like_count?.includes(user?.email);
-    console.log(liked);
+    // console.log(liked);
 
     const likeHandler = async (id, email) => {
         // console.log(id, email);
         await axios
-            .patch(`http://localhost:5000/api/v1/blogs/${id}`, { email })
+            .patch(`https://rojnamcha.onrender.com/api/v1/blogs/${id}`, { email })
             .then((res) => {
                 if (res.status === 200) {
-                    toast.success('your data successfully updated. please reload')
+                    toast.success("your data successfully updated. please reload");
                 }
             });
     };
