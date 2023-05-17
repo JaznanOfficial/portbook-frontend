@@ -1,6 +1,12 @@
+import { useGetPostsQuery } from "../features/posts/postsApi";
 import SinglePost from "./SinglePost";
 
 const AllPosts = () => {
+    const { data, isLoading, isError, error } = useGetPostsQuery();
+
+
+    console.log(data)
+
     return (
         <section className="pt-20 pb-10 lg:pt-[120px] lg:pb-20 bg-gray-100">
             <div className="container mx-auto">
@@ -21,8 +27,8 @@ const AllPosts = () => {
                     </div>
                 </div>
                 <div className=" grid grid-cols-1 md:grid-cols-4 gap-4 justify-center items-center px-5 ">
-                    {Array.from({ length: 10 }).map((item, id) => (
-                        <SinglePost key={id} />
+                    {data?.map((post, id) => (
+                        <SinglePost post={post} key={id} />
                     ))}
                 </div>
             </div>
