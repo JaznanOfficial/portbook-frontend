@@ -45,7 +45,7 @@ const useFirebase = () => {
 
                 console.log(result.user);
                 axios
-                    .get(`http://localhost:5000/api/v1/users?email=${result.user?.email}`)
+                    .get(`https://rojnamcha.onrender.com/api/v1/users?email=${result.user?.email}`)
                     .then((res) => {
                         console.log(res);
 
@@ -77,7 +77,7 @@ const useFirebase = () => {
                 };
 
                 // console.log(userData);
-                axios.post("http://localhost:5000/api/v1/users", userData);
+                axios.post("https://rojnamcha.onrender.com/api/v1/users", userData);
                 if (location?.state?.from) {
                     return navigate(location?.state?.from);
                 } else {
@@ -171,7 +171,7 @@ const useFirebase = () => {
                 setLoading(false);
                 // console.log(user);
                 axios
-                    .get(`http://localhost:5000/api/v1/users?email=${user?.email}`)
+                    .get(`https://rojnamcha.onrender.com/api/v1/users?email=${user?.email}`)
                     .then((res) => {
                         const resData = res.data[0];
                         setUserDetail(resData);

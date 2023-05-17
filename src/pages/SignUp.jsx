@@ -38,15 +38,17 @@ const SignUp = () => {
 
                     const userData = { name, email, school, address };
                     console.log(userData);
-                    axios.post("http://localhost:5000/api/v1/users", userData).then((res) => {
-                        if (res.status === 200) {
-                            toast.success("You're successfully registered");
-                            if (location) {
-                                navigate(location?.pathname);
+                    axios
+                        .post("https://rojnamcha.onrender.com/api/v1/users", userData)
+                        .then((res) => {
+                            if (res.status === 200) {
+                                toast.success("You're successfully registered");
+                                if (location) {
+                                    navigate(location?.pathname);
+                                }
+                                navigate("/");
                             }
-                            navigate("/");
-                        }
-                    });
+                        });
                 })
 
                 .catch((err) => {

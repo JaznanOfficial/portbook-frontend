@@ -22,10 +22,10 @@ const ProfileModal = ({ id, userDetail }) => {
         const updatedData = { name, email, school, address };
 
         await axios
-            .patch(`http://localhost:5000/api/v1/users?email=${user?.email}`, updatedData)
+            .patch(`https://rojnamcha.onrender.com/api/v1/users?email=${user?.email}`, updatedData)
             .then((res) => {
                 if (res.status === 200) {
-                    toast.success("User Updated Successfully")
+                    toast.success("User Updated Successfully");
                 }
             });
     };
