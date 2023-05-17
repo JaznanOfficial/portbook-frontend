@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useFirebase from "../hooks/useFirebase";
 import Loader from "../components/Loader";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const DetailsPost = () => {
     // const [isLiked, setIsLiked] = useState()
@@ -21,10 +22,14 @@ const DetailsPost = () => {
     console.log(liked);
 
     const likeHandler = async (id, email) => {
-        console.log(id, email);
+        // console.log(id, email);
         await axios
             .patch(`http://localhost:5000/api/v1/blogs/${id}`, { email })
-            .then((res) => console.log(res));
+            .then((res) => {
+                if (res.status === 200) {
+                    toast.success('your data successfully updated. please reload')
+                }
+            });
     };
 
     if (isLoading) {
@@ -79,9 +84,12 @@ const DetailsPost = () => {
                                     onClick={() => likeHandler(_id, user?.email)}
                                 ></i>
                             ) : (
-                                <i className="fa-regular fa-heart text-[5rem] text-black"></i>
+                                <i
+                                    className="fa-regular fa-heart text-[5rem] text-black"
+                                    onClick={() => likeHandler(_id, user?.email)}
+                                ></i>
                             )}
-                            <p className="text-5xl ml-3">{like_count?.length}</p>
+                            <p className="text-5xl ml-3">{like_count.length}</p>
                         </div>
 
                         <section className="not-format mt-5">

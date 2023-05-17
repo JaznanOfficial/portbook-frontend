@@ -4,12 +4,15 @@ import { apiSlice } from '../api/apiSlice';
 
 
 const postsApi = apiSlice.injectEndpoints({
+    tagTypes: ['Post', 'Like'],
     endpoints: (builder) => ({
         getPost: builder.query({
-            query:(id)=> `blogs?_id=${id}`
+            query: (id) => `blogs?_id=${id}`,
+            providesTags: ['Post'],
         }),
         getPosts: builder.query({
-            query:()=> "blogs"
+            query: () => "blogs",
+            providesTags: ['Post'],
         }),
         postPosts: builder.mutation({
             query: (data) => ({
