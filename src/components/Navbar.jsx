@@ -1,6 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
+import useFirebase from "../hooks/useFirebase";
 
 const Navbar = () => {
+    const { logOut, user } = useFirebase();
+
     const activeStyle = {
         color: "#fff",
     };
@@ -14,7 +17,7 @@ const Navbar = () => {
             link: "/media",
             name: "Media",
         },
-        
+
         {
             link: "/about",
             name: "About",
@@ -125,28 +128,44 @@ const Navbar = () => {
                                 </li>
                             );
                         })}
-
-                        
                     </ul>
                 </div>
                 <div className=" flex-none">
-                    <div className="dropdown dropdown-end">
-                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png" />
-                            </div>
-                        </label>
-                        <ul
-                            tabIndex={0}
-                            className="mt-8 p-2 shadow menu menu-compact dropdown-content border border-primary text-primary rounded-box w-52"
-                        >
-                            
-
-                            <li>
-                                <a className="text-2xl">Logout</a>
-                            </li>
-                        </ul>
-                    </div>
+                    {user?.auth ? (
+                        <div className="dropdown dropdown-end">
+                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    {user.photoURL ? (
+                                        <img src={user?.photoURL} />
+                                    ) : (
+                                        <img
+                                            src={
+                                                "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png"
+                                            }
+                                        />
+                                    )}
+                                </div>
+                            </label>
+                            {
+                                <ul
+                                    tabIndex={0}
+                                    className="mt-8 p-2 shadow menu menu-compact dropdown-content border border-primary text-primary rounded-box w-52"
+                                >
+                                    <li>
+                                        <a className="text-2xl" onClick={logOut}>
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            }
+                        </div>
+                    ) : (
+                        
+                                <Link to='sign-in' className="text-2xl border-white border  rounded-md p-3 text-white" >
+                                    Sign in
+                                </Link>
+                           
+                    )}
                 </div>
             </div>
         </>

@@ -1,6 +1,52 @@
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import useFirebase from "../hooks/useFirebase";
+import { useLocation } from "react-router-dom";
+import { useRef } from "react";
+import Loader from "../components/Loader";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+    const navigate = useNavigate();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+
+    // authentication-------------------------------------->
+
+    const location = useLocation();
+
+    const {
+        dataLoading,
+        //  signInWithGoogle,
+        //  signInWithGithub,
+        //  signInWithTwitter,
+        //  signInWithFacebook,
+        signInWithEmail,
+        signInWithGoogle,
+        user,
+        setLoading,
+    } = useFirebase(location);
+
+    // email password authentication-------------------------------------->
+
+    const signInhandler = (e) => {
+        e.preventDefault();
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        if (password.length < 6) {
+            toast.error("password must be 6 character");
+        } else {
+            setLoading(true);
+            signInWithEmail(email, password, location);
+        }
+    };
+
+    if (dataLoading) {
+        return <Loader />;
+    }
+    if (user?.auth) {
+        return navigate("/");
+    }
     return (
         <section className="bg-[#F4F7FF] py-20 lg:py-[120px]">
             <div className="container mx-auto">
@@ -18,9 +64,10 @@ const SignIn = () => {
                                     Book
                                 </span>
                             </div>
-                            <form>
+                            <form onSubmit={signInhandler}>
                                 <div className="mb-6">
                                     <input
+                                        ref={emailRef}
                                         type="text"
                                         placeholder="Email"
                                         className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
@@ -28,6 +75,7 @@ const SignIn = () => {
                                 </div>
                                 <div className="mb-6">
                                     <input
+                                        ref={passwordRef}
                                         type="password"
                                         placeholder="Password"
                                         className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
@@ -44,9 +92,9 @@ const SignIn = () => {
                             <p className="mb-6 text-base text-[#adadad]">Connect With</p>
                             <ul className="-mx-2 mb-12 flex justify-between">
                                 <li className="w-full px-2">
-                                    <a
-                                        href="javascript:void(0)"
-                                        className="flex h-11 items-center justify-center rounded-md bg-[#D64937] hover:bg-opacity-90"
+                                    <button
+                                        onClick={signInWithGoogle}
+                                        className="flex h-11 w-full items-center justify-center rounded-md bg-[#D64937] hover:bg-opacity-90"
                                     >
                                         <svg
                                             width="18"
@@ -60,7 +108,7 @@ const SignIn = () => {
                                                 fill="white"
                                             />
                                         </svg>
-                                    </a>
+                                    </button>
                                 </li>
                             </ul>
                             {/* <a
@@ -71,7 +119,8 @@ const SignIn = () => {
                             </a> */}
                             <p className="text-base text-[#adadad]">
                                 Not a member yet?
-                                <Link to='/sign-up'
+                                <Link
+                                    to="/sign-up"
                                     href="javascript:void(0)"
                                     className="text-primary hover:underline"
                                 >
