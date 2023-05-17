@@ -1,7 +1,34 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import axios from "axios";
+import useFirebase from "../hooks/useFirebase";
+import { toast } from "react-toastify";
 
-const ProfileModal = ({ id }) => {
-    
+const ProfileModal = ({ id, userDetail }) => {
+    const { user } = useFirebase();
+    console.log(userDetail);
+    const { name, email, school, address } = userDetail || {};
+
+    const nameRef = useRef();
+    const emailRef = useRef();
+    const schoolRef = useRef();
+    const addressRef = useRef();
+
+    const modalHandler = async (e) => {
+        e.preventDefault();
+        const name = nameRef.current.value;
+        const email = emailRef.current.value;
+        const address = addressRef.current.value;
+        const school = schoolRef.current.value;
+        const updatedData = { name, email, school, address };
+
+        await axios
+            .patch(`http://localhost:5000/api/v1/users?email=${user?.email}`, updatedData)
+            .then((res) => {
+                if (res.status === 200) {
+                    toast.success("User Updated Successfully")
+                }
+            });
+    };
 
     return (
         <>
@@ -23,9 +50,11 @@ const ProfileModal = ({ id }) => {
                                             Book
                                         </span>
                                     </div>
-                                    <form>
+                                    <form onSubmit={modalHandler}>
                                         <div className="mb-6">
                                             <input
+                                                ref={nameRef}
+                                                defaultValue={name}
                                                 type="text"
                                                 placeholder="Name"
                                                 className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
@@ -33,6 +62,8 @@ const ProfileModal = ({ id }) => {
                                         </div>
                                         <div className="mb-6">
                                             <input
+                                                ref={emailRef}
+                                                defaultValue={email}
                                                 type="email"
                                                 placeholder="Email"
                                                 className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
@@ -40,6 +71,8 @@ const ProfileModal = ({ id }) => {
                                         </div>
                                         <div className="mb-6">
                                             <input
+                                                ref={schoolRef}
+                                                defaultValue={school}
                                                 type="text"
                                                 placeholder="school/college"
                                                 className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
@@ -47,6 +80,8 @@ const ProfileModal = ({ id }) => {
                                         </div>
                                         <div className="mb-6">
                                             <textarea
+                                                ref={addressRef}
+                                                defaultValue={address}
                                                 type="text"
                                                 placeholder="address"
                                                 className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none h-40"

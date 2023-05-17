@@ -70,6 +70,14 @@ const useFirebase = () => {
             .then((result) => {
                 setUser(result.user);
                 setLoading(false);
+                const userData = {
+                    name: result?.user?.displayName,
+                    email: result?.user?.email,
+                    img: result?.user?.photoURL,
+                };
+
+                // console.log(userData);
+                axios.post("http://localhost:5000/api/v1/users", userData);
                 if (location?.state?.from) {
                     return navigate(location?.state?.from);
                 } else {
@@ -179,7 +187,7 @@ const useFirebase = () => {
         return () => unsubscribe;
     }, [auth]);
 
-    // console.log(userDetail);
+    console.log(userDetail);
 
     return {
         signUpWithEmailAndPassword,
