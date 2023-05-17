@@ -4,6 +4,11 @@ import useFirebase from "../hooks/useFirebase";
 import { toast } from "react-toastify";
 
 const ProfileModal = ({ id, userDetail }) => {
+    const [isModalOpen, setModalOpen] = useState(null);
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
     const { user } = useFirebase();
     console.log(userDetail);
     const { name, email, school, address } = userDetail || {};
@@ -21,6 +26,7 @@ const ProfileModal = ({ id, userDetail }) => {
         const school = schoolRef.current.value;
         const updatedData = { name, email, school, address };
 
+        closeModal();
         await axios
             .patch(`https://rojnamcha.onrender.com/api/v1/users?email=${user?.email}`, updatedData)
             .then((res) => {
@@ -32,7 +38,7 @@ const ProfileModal = ({ id, userDetail }) => {
 
     return (
         <>
-            <input type="checkbox" id={id} className="modal-toggle" />
+            <input type="checkbox" id={id} className="modal-toggle" checked={isModalOpen} />
             <div className="modal">
                 <section className=" modal-box">
                     <div className="container mx-auto">
