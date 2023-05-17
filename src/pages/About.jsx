@@ -1,11 +1,19 @@
+import Loader from "../components/Loader";
 import ProfileModal from "../components/ProfileModal";
 import useFirebase from "../hooks/useFirebase";
 
 const About = () => {
-    const { userDetail } = useFirebase();
+    const { userDetail, dataLoading } = useFirebase();
     console.log(userDetail);
 
     const { name, email, img, school, address } = userDetail || {};
+
+    if (dataLoading || !userDetail) {
+        return <Loader />; 
+    }
+
+
+
     return (
         <div>
             <div
