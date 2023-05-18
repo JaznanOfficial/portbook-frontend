@@ -28,7 +28,7 @@ const PopularPost = () => {
                                 Popular Posts
                             </span>
                             <h2 className="text-dark mb-4 text-3xl font-bold sm:text-4xl md:text-[40px]">
-                                Top 3 Posts with the Longest Like Count
+                                Top 3 Posts with the Most Likes
                             </h2>
                             <p className="text-body-color text-base">
                                 There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some form.

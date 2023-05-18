@@ -99,7 +99,7 @@ const DetailsPost = () => {
                             <p className="text-5xl ml-3">{like_count.length}</p>
                         </div>
 
-                        <section className="not-format mt-5">
+                        {/* <section className="not-format mt-5">
                             <form className="mb-6">
                                 <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                                     <textarea
@@ -139,7 +139,7 @@ const DetailsPost = () => {
                                     and explored some of the tools to design my Side Projects.
                                 </p>
                             </article>
-                        </section>
+                        </section> */}
                     </article>
                 </div>
             </main>
