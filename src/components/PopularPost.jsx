@@ -1,6 +1,16 @@
+import { useGetPostsQuery } from "../features/posts/postsApi";
+import Loader from "./Loader";
 import SinglePost from "./SinglePost";
 
 const PopularPost = () => {
+    const { data, isLoading } = useGetPostsQuery();
+
+    console.log(data)
+
+    if (isLoading) {
+        return <Loader />;
+    }
+
     return (
         <section className="pt-20 pb-10 lg:pt-[120px] lg:pb-20 bg-gray-100">
             <div className="container mx-auto">
@@ -20,9 +30,9 @@ const PopularPost = () => {
                         </div>
                     </div>
                 </div>
-                <div className=" grid grid-cols-1 md:grid-cols-3 gap-5 justify-center items-center px-5 ">
-                    {Array.from({ length: 3 }).map((item, id) => (
-                        <SinglePost key={id} />
+                <div className=" grid grid-cols-1 md:grid-cols-3 gap-5 justify-center items-end px-5 ">
+                    {data?.map((post, id) => (
+                        <SinglePost key={id} post={post} />
                     ))}
                 </div>
             </div>

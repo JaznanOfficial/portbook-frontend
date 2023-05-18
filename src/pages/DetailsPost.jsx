@@ -87,12 +87,12 @@ const DetailsPost = () => {
                         <div className="h-36 border-t border-b border-primary py-5 w-full flex justify-center items-center">
                             {liked ? (
                                 <i
-                                    className="fa-solid fa-heart text-[5rem] text-red-600"
+                                    className="fa-solid fa-heart text-[5rem] cursor-pointer text-red-600"
                                     onClick={() => likeHandler(_id, user?.email)}
                                 ></i>
                             ) : (
                                 <i
-                                    className="fa-regular fa-heart text-[5rem] text-black"
+                                    className="fa-regular fa-heart text-[5rem] cursor-pointer text-black"
                                     onClick={() => likeHandler(_id, user?.email)}
                                 ></i>
                             )}

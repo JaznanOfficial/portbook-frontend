@@ -149,7 +149,7 @@ const Navbar = () => {
                             {
                                 <ul
                                     tabIndex={0}
-                                    className="mt-8 p-2 shadow menu menu-compact dropdown-content border border-primary text-primary rounded-box w-52"
+                                    className="mt-8 p-2 shadow menu menu-compact dropdown-content border border-primary text-primary rounded-box"
                                 >
                                     <li>
                                         <a className="text-2xl" onClick={logOut}>

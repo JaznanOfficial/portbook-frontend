@@ -17,7 +17,8 @@ const PostWrite = () => {
         }
     };
 
-    const postHandler = async () => {
+    const postHandler = async (e) => {
+        e.preventDefault();
         const name = titleRef.current.value;
         const post = postRef.current.value;
 
@@ -62,11 +63,13 @@ const PostWrite = () => {
                     className="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
                     placeholder="Title"
                     type="text"
+                    required
                 />
                 <textarea
                     ref={postRef}
                     className="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none"
                     placeholder="Describe everything about this post here"
+                    required
                 ></textarea>
                 <div className="flex flex-col">
                     {previewImage && (
@@ -81,6 +84,7 @@ const PostWrite = () => {
                         accept="image/*"
                         onChange={handleImageChange}
                         className="border border-gray-300 p-2 outline-none"
+                        required
                     />
                 </div>
                 <div className="flex justify-end w-full">
