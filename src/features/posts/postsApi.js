@@ -1,7 +1,7 @@
 import { apiSlice } from "../api/apiSlice";
 
 const postsApi = apiSlice.injectEndpoints({
-    tagTypes: ["Post", "Like"],
+    tagTypes: ["Post", ],
     endpoints: (builder) => ({
         getPost: builder.query({
             query: (id) => `blogs?_id=${id}`,
@@ -9,7 +9,7 @@ const postsApi = apiSlice.injectEndpoints({
         }),
         getPosts: builder.query({
             query: () => "blogs",
-            // providesTags: ['Post'],
+            providesTags: ['Post'],
         }),
         postPosts: builder.mutation({
             query: (data) => ({
@@ -17,15 +17,23 @@ const postsApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data,
             }),
+            invalidatesTags: ['Post']
         }),
         likePost: builder.mutation({
-            query: (body) => ({
-                url: `blogs/${body.id}`,
-                method: "PATCH",
-                body: body.email,
-            }),
+            query: (body) => {
+                const {id,email} = body
+                // console.log(email);
+
+                return {
+                    url: `blogs/${id}`,
+                    method: "PATCH",
+                    body: {email},
+                };
+            },
+            invalidatesTags: ['Post']
         }),
     }),
 });
 
-export const { useGetPostsQuery, usePostPostsMutation, useGetPostQuery, useLikePostMutation } = postsApi;
+export const { useGetPostsQuery, usePostPostsMutation, useGetPostQuery, useLikePostMutation } =
+    postsApi;

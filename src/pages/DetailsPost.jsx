@@ -1,4 +1,4 @@
-import { useGetPostQuery } from "../features/posts/postsApi";
+import { useGetPostQuery, useLikePostMutation } from "../features/posts/postsApi";
 import { useParams } from "react-router-dom";
 import useFirebase from "../hooks/useFirebase";
 import Loader from "../components/Loader";
@@ -20,16 +20,23 @@ const DetailsPost = () => {
 
     const liked = like_count?.includes(user?.email);
     // console.log(liked);
+    const [likePost,{data:likedData, isLoading:loading, }] = useLikePostMutation();
+
+    // console.log(likePost);
 
     const likeHandler = async (id, email) => {
         // console.log(id, email);
-        await axios
-            .patch(`https://rojnamcha.onrender.com/api/v1/blogs/${id}`, { email })
-            .then((res) => {
-                if (res.status === 200) {
-                    toast.success("your data successfully updated. please reload");
-                }
-            });
+        // await axios
+        //     .patch(`https://rojnamcha.onrender.com/api/v1/blogs/${id}`, { email })
+        //     .then((res) => {
+        //         if (res.status === 200) {
+        //             toast.success("your data successfully updated. please reload");
+        //         }
+        //     });
+
+        // const body = { id, email };
+
+        likePost({id,email});
     };
 
     if (isLoading) {
